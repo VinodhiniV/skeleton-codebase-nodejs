@@ -3,7 +3,7 @@ import fs from 'fs/promises';
 const FILENAME = 'workouts.json';
 
 export class WorkoutRepository {
-    async save(workout) {
+    async nosave(workout) {
         let workouts = [];
         try {
             const data = await fs.readFile(FILENAME, 'utf8');
