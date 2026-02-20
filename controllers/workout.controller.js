@@ -36,7 +36,14 @@ export const listWorkouts = async (req, res) => {
     }
 
     const workouts = await repo.fetch(customerId);
-    res.json({ workouts });
+
+    // ✅ Attach score
+    const withScore = workouts.map(w => {
+      const workout = Workout.fromJSON(w);
+      return { ...w, score: workout.score };
+    });
+
+    res.json({ workouts: withScore });
   } catch (err) {
     res.status(500).json({ message: 'Failed to fetch workouts', error: err.message });
   }
@@ -52,12 +59,24 @@ export const listTimeBasedWorkouts = async (req, res) => {
 
     const workouts = await repo.fetch(customerId);
 
-    // Time-based workouts = distance is null (Yoga, Strength-Training)
     const timeBased = workouts.filter(w => w.distance == null);
-    let distanceBased = workouts.filter(w => w.time == null);
+    const distanceBased = workouts.filter(w => w.distance != null);
 
-    res.json({ timebasedWorkouts: timeBased, distancebasedWorkouts: distanceBased });
+    const timeBasedWithScore = timeBased.map(w => {
+      const workout = Workout.fromJSON(w);
+      return { ...w, score: workout.score };
+    });
+
+    const distanceBasedWithScore = distanceBased.map(w => {
+      const workout = Workout.fromJSON(w);
+      return { ...w, score: workout.score };
+    });
+
+    res.json({
+      timebasedWorkouts: timeBasedWithScore,
+      distancebasedWorkouts: distanceBasedWithScore
+    });
   } catch (err) {
-    res.status(500).json({ message: 'Failed to fetch time-based workouts', error: err.message });
+    res.status(500).json({ message: 'Failed to fetch workouts', error: err.message });
   }
 };
