@@ -44,14 +44,19 @@ export const listWorkouts = async (req, res) => {
 
 export const listTimeBasedWorkouts = async (req, res) => {
   try {
-    let { customerId } = req.params;
-    let { time } = req.query; 
-    let workouts = await repo.fetch(customerId);
-    let timeBased = workouts.filter(w => w.distance == null)
-    if (time) {
-      timeBased = timeBased.filter(w => w.time === time);
+    const { customerId } = req.params;
+
+    if (!customerId) {
+      return res.status(400).json({ message: 'customerId is required' });
     }
-    res.json({ workouts: timeBased });
+
+    const workouts = await repo.fetch(customerId);
+
+    // Time-based workouts = distance is null (Yoga, Strength-Training)
+    const timeBased = workouts.filter(w => w.distance == null);
+    let distanceBased = workouts.filter(w => w.time == null);
+
+    res.json({ timebasedWorkouts: timeBased, distancebasedWorkouts: distanceBased });
   } catch (err) {
     res.status(500).json({ message: 'Failed to fetch time-based workouts', error: err.message });
   }
