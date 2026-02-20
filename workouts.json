@@ -1,0 +1,69 @@
+[
+  {
+    "customerId": "nikki",
+    "type": "walking",
+    "date": "2026-02-18",
+    "time": "07:30",
+    "duration": 45,
+    "distance": 3600
+  },
+  {
+    "customerId": "nikki",
+    "type": "yoga",
+    "date": "2026-02-19",
+    "time": "08:00",
+    "duration": 60
+  },
+  {
+    "customerId": "nikki",
+    "type": "running",
+    "date": "2026-02-20",
+    "time": "06:45",
+    "duration": 30,
+    "distance": 5000
+  },
+  {
+    "customerId": "nikki",
+    "type": "strength-training",
+    "date": "2026-02-20",
+    "time": "17:00",
+    "duration": 50
+  },
+  {
+    "customerId": "neha",
+    "type": "cycling",
+    "date": "2026-02-20",
+    "time": "09:00",
+    "duration": 40,
+    "distance": 12000
+  },
+  {
+    "customerId": "harsha",
+    "type": "yoga",
+    "date": "2026-02-20",
+    "time": "2:30",
+    "duration": 50
+  },
+  {
+    "customerId": "avani",
+    "type": "strength-training",
+    "date": "2026-02-20",
+    "time": "0:45",
+    "duration": 45
+  },
+  {
+    "customerId": "shivani",
+    "type": "yoga",
+    "date": "2026-02-20",
+    "time": "5:00",
+    "duration": 45
+  },
+  {
+    "customerId": "nikki",
+    "type": "cycling",
+    "date": "2026-02-20",
+    "time": "20:00",
+    "duration": 45,
+    "distance": 5000
+  }
+]

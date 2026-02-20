@@ -1,47 +1,54 @@
-# GoFit Node.js 
+# GoFit Node.js
 
-A modern command-line application for tracking walking, cycling, and running workouts
+A command-line application for tracking workouts — distance-based (walking, cycling, running) and time-based (yoga, strength-training).
 
-## Features
+> For a full breakdown of all issues found and refactoring decisions made, see [PROJECT_OVERVIEW.md](PROJECT_OVERVIEW.md).
 
-- **Record Workouts**: Capture workout type (walking, cycling, running), date, time, duration, and distance.
-- **Data Validation**: Built-in validation for dates (YYYY-MM-DD), time (HH:MM), and numeric fields.
-- **Local Persistence**: Workouts are saved locally in a `workouts.json` file.
-- **Instant Feedback**: Automatically calculates and displays average speed (metres/minute) for each workout.
-- **Searchable**: List and view all workouts for a specific Customer ID.
+---
+
+## Project Structure
+
+```
+.
+├── index.js             # Entry point — menu wiring and main loop
+├── workoutHandler.js    # CLI handler — prompts, display, record/list/exit actions
+├── validators.js        # Input validation — date, time, number, and empty-field rules
+├── workout.js           # Workout class hierarchy: Workout, DistanceWorkout, TimeBasedWorkout
+├── repository.js        # Data access layer — reads/writes workouts.json
+├── constants.js         # Shared constants: workout types, categories, date/time formats
+├── workouts.json        # Local data store (auto-created on first save)
+├── PROJECT_OVERVIEW.md  # Full refactoring notes and issue log
+└── package.json         # Project metadata and dependencies
+```
+
+---
 
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) (v16 or higher recommended)
 - [npm](https://www.npmjs.com/)
 
+---
+
 ## Installation
 
-1. Clone the repository or copy the project files.
-2. Install the dependencies:
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
+
+---
 
 ## Usage
-
-Start the application by running:
 
 ```bash
 node index.js
 ```
 
-### Main Menu
-- **Record Workout**: Follow the prompts to enter your workout details.
-- **List Workouts**: Enter a Customer ID to view their workout history and statistics.
-- **Exit**: Close the application.
+- **1 / Record Workout** — Select a workout type and enter details. Distance is only prompted for distance-based workouts.
+- **2 / List Workouts** — Enter a Customer ID to view workout history.
+- **3 / Exit** — Close the application.
 
-## Project Structure
-
-- `index.js`: Main entry point containing the CLI logic and user prompts.
-- `repository.js`: Data access layer handling read/write operations for `workouts.json`.
-- `workout.js`: Workout data model and logic for speed calculations.
-- `package.json`: Project metadata and dependencies (`inquirer`, `chalk`, `date-fns`).
+---
 
 ## License
 
