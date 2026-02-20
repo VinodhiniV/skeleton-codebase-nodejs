@@ -1,28 +1,35 @@
 import fs from 'fs/promises';
+import { config } from './config.js';
 
 const FILENAME = 'workouts.json';
 
 export class WorkoutRepository {
-    async save(workout) {
-        let workouts = [];
-        try {
-            const data = await fs.readFile(FILENAME, 'utf8');
-            workouts = JSON.parse(data);
-        } catch (error) {
-            // File might not exist yet, that's fine
-        }
+  constructor(filename = FILENAME) {
+    this.filename = filename;
+  }
 
-        workouts.push(workout);
-        await fs.writeFile(FILENAME, JSON.stringify(workouts, null, 2));
+  async _readFile() {
+    try {
+      const data = await fs.readFile(this.filename, 'utf8');
+      return JSON.parse(data);
+    } catch (error) {
+      if (error.code === 'ENOENT') return []; // File doesn't exist yet
+      throw error; // Unexpected error, propagate
     }
+  }
 
-    async fetch(customerId) {
-        try {
-            const data = await fs.readFile(FILENAME, 'utf8');
-            const workouts = JSON.parse(data);
-            return workouts.filter(w => w.customerId === customerId);
-        } catch (error) {
-            return [];
-        }
-    }
+  async _writeFile(workouts) {
+    await fs.writeFile(this.filename, JSON.stringify(workouts, null, 2));
+  }
+
+  async save(workout) {
+    const workouts = await this._readFile();
+    workouts.push(workout);
+    await this._writeFile(workouts);
+  }
+
+  async fetch(customerId) {
+    const workouts = await this._readFile();
+    return workouts.filter(w => w.customerId === customerId);
+  }
 }
