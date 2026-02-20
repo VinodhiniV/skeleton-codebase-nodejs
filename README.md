@@ -1,10 +1,9 @@
-# GoFit Node.js Replica
+# GoFit Node.js 
 
-A modern command-line application for tracking walking, cycling, and running workouts, replicated from the original [GoFit](https://github.com/sajjadnazrulla/gofit) Go project.
+A modern command-line application for tracking walking, cycling, and running workouts
 
 ## Features
 
-- **Interactive CLI**: Powered by `inquirer.js` for a seamless user experience.
 - **Record Workouts**: Capture workout type (walking, cycling, running), date, time, duration, and distance.
 - **Data Validation**: Built-in validation for dates (YYYY-MM-DD), time (HH:MM), and numeric fields.
 - **Local Persistence**: Workouts are saved locally in a `workouts.json` file.
